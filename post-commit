@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Path to the Python script
+PYTHON_SCRIPT="S:\CODES\PYTHON3.0\NLP\main.py
+# Path to the directory where the code files are located
+CODE_DIR="S:\CODES\PYTHON3.0\NLP"
+
+# Get the list of committed files
+COMMITTED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+# Loop through the committed files
+for FILE in $COMMITTED_FILES; do
+    if [ -f "$CODE_DIR/$FILE" ]; then
+        # Run the Python script with the file path
+        python "$PYTHON_SCRIPT" "$CODE_DIR/$FILE"
+    fi
+done
