@@ -11,16 +11,25 @@ LOG_FILE="S:\CODES\PYTHON3.0\NLP\log.txt"
 # Get list of committed files
 FILES=$(git diff --cached --name-only --diff-filter=ACM)
 
+# Print some debug information
+echo "Running post-commit hook script" >> "$LOG_FILE"
+
 # Loop through committed files
 for FILE in $FILES
 do
     # Check file extension
     EXTENSION="${FILE##*.}"
+    echo "Processing file: $FILE" >> "$LOG_FILE"
     case "$EXTENSION" in
         py|java|cpp|c|cs|js)
+            echo "Running main.py for file: $FILE" >> "$LOG_FILE"
             # Run main.py for files with appropriate extensions and redirect output to log file
-            python3 "$MAIN_SCRIPT" "$FILE" >> "$LOG_FILE"
+            python3 "$MAIN_SCRIPT" "$FILE" >> "$LOG_FILE" 2>&1
+            ;;
+        *)
+            echo "Skipping file: $FILE (extension: $EXTENSION)" >> "$LOG_FILE"
             ;;
     esac
 done
+
 
