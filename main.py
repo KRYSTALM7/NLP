@@ -37,29 +37,19 @@ def generate_template_documentation(function_name, parameters):
 def evaluate_readability(documentation):
     return textstat.flesch_reading_ease(documentation)
 
-# Step 6: Integration
 def generate_and_evaluate_documentation(file_path):
     # Read code file
     code_snippet = read_code_file(file_path)
-
     # Preprocess code
     function_name, parameters = preprocess_code(code_snippet)
-
     # Extract features
     features = extract_features(code_snippet)
-
     # Generate documentation
     generated_doc = generate_template_documentation(function_name, parameters)
-
     # Evaluate readability
     readability_score = evaluate_readability(generated_doc)
-
     return generated_doc, readability_score
 
-# Example usage
-file_path = "S:\CODES\PYTHON3.0\CRYPTOGRAPHY ASSIGNMENTS\euclidean.py"  # Path to your code file
-generated_doc, readability_score = generate_and_evaluate_documentation(file_path)
 
-print("Generated Documentation:")
-print(generated_doc)
-print("Readability score:", readability_score)
+
+
