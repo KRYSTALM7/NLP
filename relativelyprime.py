@@ -4,6 +4,6 @@ def gcd(a,b):
     return a
 def coprime(a,b):
     return gcd(a,b)==1
-print(coprime(14,15))
+print(coprime(14,13))
 
 
