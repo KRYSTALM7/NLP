@@ -1,17 +1,26 @@
-#!/bin/sh
+#!/bin/bash
 
-# Path to the Python script
-PYTHON_SCRIPT="S:\CODES\PYTHON3.0\NLP\main.py
-# Path to the directory where the code files are located
-CODE_DIR="S:\CODES\PYTHON3.0\NLP"
+# Post-commit hook script to run main.py
 
-# Get the list of committed files
-COMMITTED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+# Path to main.py script
+MAIN_SCRIPT="S:\CODES\PYTHON3.0\NLP\main.py"
 
-# Loop through the committed files
-for FILE in $COMMITTED_FILES; do
-    if [ -f "$CODE_DIR/$FILE" ]; then
-        # Run the Python script with the file path
-        python "$PYTHON_SCRIPT" "$CODE_DIR/$FILE"
-    fi
+# Log file path
+LOG_FILE="S:\CODES\PYTHON3.0\NLP\log.txt"
+
+# Get list of committed files
+FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+# Loop through committed files
+for FILE in $FILES
+do
+    # Check file extension
+    EXTENSION="${FILE##*.}"
+    case "$EXTENSION" in
+        py|java|cpp|c|cs|js)
+            # Run main.py for files with appropriate extensions and redirect output to log file
+            python3 "$MAIN_SCRIPT" "$FILE" >> "$LOG_FILE"
+            ;;
+    esac
 done
+
